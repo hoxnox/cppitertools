@@ -46,6 +46,7 @@ Status | Compilers
 
 ##### Combinatoric fuctions
 [product](#product)<br />
+[mixed\_product](#mixed_product)<br />
 [combinations](#combinations)<br />
 [combinations\_with\_replacement](#combinations_with_replacement)<br />
 [permutations](#permutations)<br />
@@ -829,6 +830,37 @@ std::string s = "abc";
 for (auto&& t : product<3>(s)) {
    // ...
 }
+```
+
+mixed\_product
+------
+*Additional Requirements*: Input must have a ForwardIterator
+
+Generates the cartesian project of the given ranges put together in
+mixed mode (tries to move all iterators every step).
+
+Example usage:
+```c++
+vector<int> v1{1,2,3};
+vector<int> v2{7,8};
+vector<string> v3{"the","cat"};
+vector<string> v4{"hi","what","up","dude"};
+for (auto&& t : mixed_product(v1,v2,v3,v4)) {
+    cout << std::get<0>(t) << ", "
+        << std::get<1>(t) << ", "
+        << std::get<2>(t) << ", "
+        << std::get<3>(t) << '\n';
+}
+```
+
+The above prints:
+```
+1, 7, the, hi
+2, 8, cat, what
+3, 8, cat, hi
+1, 7, cat, dude
+1, 8, the, what
+...
 ```
 
 combinations
